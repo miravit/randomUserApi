@@ -1,11 +1,12 @@
-import { randomUsers } from "./services/randomUsersApi";
-import { IUser } from "./models/IUser";
+import { UserResponse } from "./models/UserResponse";
+import { randomUserApi } from "./services/randomUsersApi";
 
-export async function createHtml(): Promise<void> {
-  const userList: IUser[] = await randomUsers();
-  userList.forEach((users: IUser) => {
-    console.log("en user", users.picture.large);
-  });
+async function getUserResult() {
+  const result = await randomUserApi();
+  for (let i = 0; i < result.results.length; i++) {
+    const test = result.results[i].dob;
+    console.log("lol", test);
+  }
 }
 
-createHtml();
+getUserResult();
