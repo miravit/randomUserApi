@@ -1,0 +1,34 @@
+// mobile first
+
+.pageTitle {
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+}
+
+.usersContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+  height: 32%;
+  width: 325px;
+
+  .usersContainer__img {
+    background-color: white;
+    width: 70%;
+    height: 45%;
+    margin-top: 30px;
+  }
+  .userContainer__info {
+    width: 100%;
+    height: 45%;
+  }
+}
