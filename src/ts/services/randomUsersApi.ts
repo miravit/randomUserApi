@@ -1,7 +1,14 @@
 import axios from "axios";
+import { IUser } from "../models/IUser";
+import { IUserResponse } from "../models/IUserResponse";
 
-export function randomUsers() {
-  return axios.get("https://randomuser.me/api/?results=50").then((response) => {
-    return response.data;
-  });
-}
+export const randomUsers = async (): Promise<IUser[]> => {
+  return await axios
+    .get<IUserResponse>("https://randomuser.me/api/?results=50")
+    .then((data) => {
+      return data.data.results;
+    })
+    .catch(() => {
+      return [];
+    });
+};
