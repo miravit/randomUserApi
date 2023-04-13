@@ -9,13 +9,13 @@ export async function createHtml() {
     // console.log("-->", result.results.location.street.number);
 
     const usersContainer = document.createElement("div");
-    usersContainer.setAttribute("class", "usersContainer__hej");
+    usersContainer.setAttribute("class", "usersContainer");
 
     const profileImg = createImg(response, usersContainer);
     profileImg.setAttribute("class", "usersContainer__img");
 
     const usersInfoContainer = document.createElement("div");
-    usersContainer.setAttribute("class", "usersContainer");
+    usersInfoContainer.setAttribute("class", "usersContainer__info");
 
     const userName = createUserName(response, usersInfoContainer);
     userName.setAttribute("class", "usersContainer__info--name");
@@ -30,7 +30,7 @@ export async function createHtml() {
     userLocation.setAttribute("class", "usersContainer__info--location");
 
     const userEmail = createUserEmail(response, usersContainer);
-    userEmail.setAttribute("class", "usersContainer__info--location");
+    userEmail.setAttribute("class", "usersContainer__button");
 
     usersContainer.appendChild(usersInfoContainer);
     profilesContainer.appendChild(usersContainer);

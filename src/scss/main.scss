@@ -18,6 +18,9 @@
   width: 380px;
 
   .usersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: rgb(195, 188, 188);
     width: 90%;
     margin-top: 30px;
@@ -30,8 +33,17 @@
     margin-top: 5px;
   }
 
+  // .usersContainer:nth-child(2) {
+  // }
+
   .usersContainer__img {
-    margin-left: 105px;
+    width: 150px;
     margin-top: 10px;
+    border: solid 2px black;
+  }
+  .usersContainer__info {
+    display: block;
+  }
+  .usersContainer__button {
   }
 }
