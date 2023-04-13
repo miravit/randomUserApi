@@ -30,7 +30,7 @@ export async function createHtml() {
     userLocation.setAttribute("class", "usersContainer__info--location");
 
     const userEmail = createUserEmail(response, usersContainer);
-    //userEmail.setAttribute("class", "usersContainer__info--button");
+    userEmail.setAttribute("class", "usersContainer__info--location");
 
     usersContainer.appendChild(usersInfoContainer);
     profilesContainer.appendChild(usersContainer);
@@ -77,5 +77,5 @@ function createUserEmail(response, usersInfoContainer) {
     window.location.href = "mailto:" + response.email;
   };
   usersInfoContainer.appendChild(userEmailButton);
-  console.log(response.email);
+  return userEmailButton;
 }
