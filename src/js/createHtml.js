@@ -11,23 +11,22 @@ export async function createHtml() {
     const usersContainer = document.createElement("div");
     usersContainer.setAttribute("class", "usersContainer");
 
+    const userName = createUserName(response, usersContainer);
+    userName.setAttribute("class", "usersContainer__info--name");
+
     const profileImg = createImg(response, usersContainer);
     profileImg.setAttribute("class", "usersContainer__img");
 
     const usersInfoContainer = document.createElement("div");
     usersInfoContainer.setAttribute("class", "usersContainer__info");
-
-    const userName = createUserName(response, usersInfoContainer);
-    userName.setAttribute("class", "usersContainer__info--name");
+    const userLocation = createUserLocation(response, usersInfoContainer);
+    userLocation.setAttribute("class", "usersContainer__info--location");
 
     const userAge = createUserInfo(response.dob.age, usersInfoContainer);
     userAge.setAttribute("class", "usersContainer__info--age");
 
     const userGender = createUserInfo(response.gender, usersInfoContainer);
     userGender.setAttribute("class", "usersContainer__info--gender");
-
-    const userLocation = createUserLocation(response, usersInfoContainer);
-    userLocation.setAttribute("class", "usersContainer__info--location");
 
     const userEmail = createUserEmail(response, usersContainer);
     userEmail.setAttribute("class", "usersContainer__button");
