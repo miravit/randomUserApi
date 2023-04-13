@@ -29,6 +29,9 @@ export async function createHtml() {
     const userLocation = createUserLocation(response, usersInfoContainer);
     userLocation.setAttribute("class", "usersContainer__info--location");
 
+    const userEmail = createUserEmail(response, usersContainer);
+    //userEmail.setAttribute("class", "usersContainer__info--button");
+
     usersContainer.appendChild(usersInfoContainer);
     profilesContainer.appendChild(usersContainer);
   }
@@ -64,4 +67,15 @@ function createUserLocation(response, usersInfoContainer) {
     response.location.city + ", " + response.location.country;
   usersInfoContainer.appendChild(userLocation);
   return userLocation;
+}
+
+function createUserEmail(response, usersInfoContainer) {
+  const userEmailButton = document.createElement("button");
+  userEmailButton.setAttribute("type", "button");
+  userEmailButton.innerHTML = "Send an email!";
+  userEmailButton.onclick = () => {
+    window.location.href = "mailto:" + response.email;
+  };
+  usersInfoContainer.appendChild(userEmailButton);
+  console.log(response.email);
 }
