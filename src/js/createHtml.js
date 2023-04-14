@@ -1,9 +1,34 @@
 import { randomUserApi } from "./services/randomUsersApi";
 
+let page = 1;
+let userResults = 12;
+
 export async function createHtml() {
+  const result = await randomUserApi(page, userResults);
+
   const profilesContainer = document.getElementById("profilesContainer");
 
-  const result = await randomUserApi();
+  let paginationButton = document.getElementById("paginationButton");
+  paginationButton.addEventListener("click", () => {
+    if (page < 4) {
+      page++;
+      createHtml();
+      return page;
+      // } else if (page === 4) {
+      //   userResults = 2;
+      //   createHtml();
+      //   return userResults;
+      // }
+      // if (page = 5) {
+      //   page++;
+      //   createHtml();
+      //   return page;
+      // } else {
+      //   userResults = 2;
+      //   return userResults;
+      // }
+    }
+  });
   for (let i = 0; i < result.results.length; i++) {
     const response = result.results[i];
     // console.log("-->", result.results.location.street.number);
@@ -35,7 +60,6 @@ export async function createHtml() {
     const userEmailButton = createUserEmailButton(response, usersContainer);
     userEmailButton.setAttribute("class", "usersContainer__button");
   }
-  return createHtml;
 }
 
 function createImg(response, usersContainer) {
