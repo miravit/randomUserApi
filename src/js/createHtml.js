@@ -11,14 +11,15 @@ export async function createHtml() {
     const usersContainer = document.createElement("div");
     usersContainer.setAttribute("class", "usersContainer");
 
-    const userName = createUserName(response, usersContainer);
-    userName.setAttribute("class", "usersContainer__info--name");
+    const userNameAndNat = createUserNameAndNat(response, usersContainer);
+    userNameAndNat.setAttribute("class", "usersContainer__info--name");
 
     const profileImg = createImg(response, usersContainer);
     profileImg.setAttribute("class", "usersContainer__img");
 
     const usersInfoContainer = document.createElement("div");
     usersInfoContainer.setAttribute("class", "usersContainer__info");
+
     const userLocation = createUserLocation(response, usersInfoContainer);
     userLocation.setAttribute("class", "usersContainer__info--location");
 
@@ -28,11 +29,11 @@ export async function createHtml() {
     const userGender = createUserInfo(response.gender, usersInfoContainer);
     userGender.setAttribute("class", "usersContainer__info--gender");
 
-    const userEmail = createUserEmail(response, usersContainer);
-    userEmail.setAttribute("class", "usersContainer__button");
-
     usersContainer.appendChild(usersInfoContainer);
     profilesContainer.appendChild(usersContainer);
+
+    const userEmailButton = createUserEmailButton(response, usersContainer);
+    userEmailButton.setAttribute("class", "usersContainer__button");
   }
   return createHtml;
 }
@@ -52,10 +53,18 @@ function createUserInfo(response, usersInfoContainer) {
   return userInfo;
 }
 
-function createUserName(response, usersInfoContainer) {
+function createUserNameAndNat(response, usersInfoContainer) {
   const userName = document.createElement("p");
   userName.innerHTML =
-    response.name.title + " " + response.name.first + " " + response.name.last;
+    response.name.title +
+    " " +
+    response.name.first +
+    " " +
+    response.name.last +
+    " " +
+    "(" +
+    response.nat +
+    ")";
   usersInfoContainer.appendChild(userName);
   return userName;
 }
@@ -68,7 +77,7 @@ function createUserLocation(response, usersInfoContainer) {
   return userLocation;
 }
 
-function createUserEmail(response, usersInfoContainer) {
+function createUserEmailButton(response, usersInfoContainer) {
   const userEmailButton = document.createElement("button");
   userEmailButton.setAttribute("type", "button");
   userEmailButton.innerHTML = "Send an email!";
