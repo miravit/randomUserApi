@@ -10,20 +10,10 @@ export function pagination() {
     if (page < 4) {
       page++;
       createHtml();
-      //return page;
-      // } else if (page === 4) {
-      //   userResults = 2;
-      //   createHtml();
-      //   return userResults;
-      // }
-      // if (page = 5) {
-      //   page++;
-      //   createHtml();
-      //   return page;
-      // } else {
-      //   userResults = 2;
-      //   return userResults;
-      // }
+    } else if (page === 4) {
+      page++;
+      userResults = 2;
+      createHtml();
     }
   });
 }
@@ -153,11 +143,9 @@ export function filterUsers(page, userResults) {
   filterbutton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (chooseFilter.value === "1") {
-      page = 3;
       gender = "male";
       console.log("male");
     } else if (chooseFilter.value === "2") {
-      page = 3;
       gender = "female";
     }
 
