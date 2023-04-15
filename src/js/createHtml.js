@@ -4,27 +4,29 @@ let page = 1;
 let userResults = 12;
 let gender = "";
 
-let paginationButton = document.getElementById("paginationButton");
-paginationButton.addEventListener("click", () => {
-  if (page < 4) {
-    page++;
-    createHtml();
-    //return page;
-    // } else if (page === 4) {
-    //   userResults = 2;
-    //   createHtml();
-    //   return userResults;
-    // }
-    // if (page = 5) {
-    //   page++;
-    //   createHtml();
-    //   return page;
-    // } else {
-    //   userResults = 2;
-    //   return userResults;
-    // }
-  }
-});
+export function pagination() {
+  let paginationButton = document.getElementById("paginationButton");
+  paginationButton.addEventListener("click", () => {
+    if (page < 4) {
+      page++;
+      createHtml();
+      //return page;
+      // } else if (page === 4) {
+      //   userResults = 2;
+      //   createHtml();
+      //   return userResults;
+      // }
+      // if (page = 5) {
+      //   page++;
+      //   createHtml();
+      //   return page;
+      // } else {
+      //   userResults = 2;
+      //   return userResults;
+      // }
+    }
+  });
+}
 
 export async function createHtml() {
   filterUsers(page, userResults);
@@ -151,14 +153,17 @@ export function filterUsers(page, userResults) {
   filterbutton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (chooseFilter.value === "1") {
+      page = 3;
       gender = "male";
       console.log("male");
     } else if (chooseFilter.value === "2") {
+      page = 3;
       gender = "female";
     }
 
     await randomUserApi(page, userResults, gender);
 
     createHtml();
+    pagination();
   });
 }
