@@ -2,33 +2,37 @@ import { randomUserApi } from "./services/randomUsersApi";
 
 let page = 1;
 let userResults = 12;
+let gender = "";
+
+let paginationButton = document.getElementById("paginationButton");
+paginationButton.addEventListener("click", () => {
+  if (page < 4) {
+    page++;
+    createHtml();
+    //return page;
+    // } else if (page === 4) {
+    //   userResults = 2;
+    //   createHtml();
+    //   return userResults;
+    // }
+    // if (page = 5) {
+    //   page++;
+    //   createHtml();
+    //   return page;
+    // } else {
+    //   userResults = 2;
+    //   return userResults;
+    // }
+  }
+});
 
 export async function createHtml() {
-  const result = await randomUserApi(page, userResults);
+  filterUsers(page, userResults);
+  let result = await randomUserApi(page, userResults, gender);
 
   const profilesContainer = document.getElementById("profilesContainer");
+  profilesContainer.innerHTML = "";
 
-  let paginationButton = document.getElementById("paginationButton");
-  paginationButton.addEventListener("click", () => {
-    if (page < 4) {
-      page++;
-      createHtml();
-      return page;
-      // } else if (page === 4) {
-      //   userResults = 2;
-      //   createHtml();
-      //   return userResults;
-      // }
-      // if (page = 5) {
-      //   page++;
-      //   createHtml();
-      //   return page;
-      // } else {
-      //   userResults = 2;
-      //   return userResults;
-      // }
-    }
-  });
   for (let i = 0; i < result.results.length; i++) {
     const response = result.results[i];
     // console.log("-->", result.results.location.street.number);
@@ -110,4 +114,51 @@ function createUserEmailButton(response, usersInfoContainer) {
   };
   usersInfoContainer.appendChild(userEmailButton);
   return userEmailButton;
+}
+
+export function filterUsers(page, userResults) {
+  const filterGender = document.getElementById("filterUsers");
+
+  const existingForm = filterGender.querySelector("form");
+  if (existingForm) {
+    filterGender.removeChild(existingForm);
+  }
+
+  const filterForm = document.createElement("form");
+  const chooseFilter = document.createElement("select");
+  const filterMale = document.createElement("option");
+  const filterFemale = document.createElement("option");
+  const filterLabel = document.createElement("label");
+
+  let filterbutton = document.createElement("button");
+  filterbutton.setAttribute("type", "submit");
+  filterbutton.innerHTML = "Sort";
+
+  filterLabel.innerHTML = "Choose Gender:";
+
+  filterMale.value = "1";
+  filterMale.text = "Male";
+  filterFemale.value = "2";
+  filterFemale.text = "Female";
+
+  filterForm.appendChild(filterLabel);
+  chooseFilter.appendChild(filterMale);
+  chooseFilter.appendChild(filterFemale);
+  filterForm.appendChild(chooseFilter);
+  filterForm.appendChild(filterbutton);
+  filterGender.appendChild(filterForm);
+
+  filterbutton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (chooseFilter.value === "1") {
+      gender = "male";
+      console.log("male");
+    } else if (chooseFilter.value === "2") {
+      gender = "female";
+    }
+
+    await randomUserApi(page, userResults, gender);
+
+    createHtml();
+  });
 }
