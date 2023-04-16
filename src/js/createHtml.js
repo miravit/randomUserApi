@@ -41,6 +41,9 @@ function previousPage() {
       buttonWrapper.appendChild(paginationButton);
       userResults = 12;
       updatePage();
+      if (page == 0) {
+        console.log("hej");
+      }
     }
   });
 

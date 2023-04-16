@@ -1,14 +1,10 @@
 @use "./mixins/breakpoints.scss" as mix;
+@use "./mixins/variables" as var;
 
 body {
-  background: rgb(152, 8, 8);
-  background: linear-gradient(
-    262deg,
-    rgba(152, 8, 8, 1) 0%,
-    rgb(219, 111, 111) 100%
-  );
+  background: var.$background;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  color: rgb(100, 102, 107);
+  color: var.$font-color-primary;
 }
 
 .pageContainer {
@@ -24,15 +20,14 @@ body {
 
 .pageTitle {
   margin: 0;
-  color: rgb(255, 255, 255);
+  color: var.$secondary-color;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-shadow: -1px 2px 0 rgb(137, 179, 74), 2px 2px 0 #000,
-    1px -1px 0 rgb(137, 179, 74), -1px -1px 0 #000;
+  text-shadow: -1px 2px 0 rgb(0, 0, 0), 2px 2px 0 #000, 1px -1px 0 rgb(0, 0, 0),
+    -1px -1px 0 #000;
 
   @include mix.tablet {
     margin-bottom: 19px;
     font-size: 30px;
-    // padding-top: 10px;
   }
   @include mix.desktop {
     font-size: 40px;
@@ -63,7 +58,6 @@ body {
     margin-bottom: 0px;
   }
   @include mix.desktop {
-    // margin-top: 10px;
     margin-bottom: 17px;
   }
 
@@ -71,7 +65,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: var.$secondary-color;
     border-radius: 10px;
     width: 320px;
     margin-top: 40px;
@@ -85,7 +79,87 @@ body {
       height: 230px;
       padding-top: -100px;
     }
+    &__img {
+      width: 26%;
+      border-radius: 50%;
+
+      @include mix.tablet {
+        width: 40%;
+      }
+      @include mix.desktop {
+        width: 35%;
+      }
+    }
+    &__info {
+      display: flex;
+      width: 300px;
+      border-radius: 2px;
+      &--name {
+        margin-top: 2px;
+        margin-bottom: 0px;
+        @include mix.tablet {
+          margin: 13px;
+        }
+
+        @include mix.desktop {
+          margin: 10px;
+        }
+      }
+      &--location {
+        width: 200px;
+        text-align: center;
+        margin: 8;
+        text-align: center;
+      }
+      &--gender {
+        width: 200px;
+        text-align: center;
+        margin: 8;
+      }
+      &--age {
+        color: var.$primary-color;
+        max-width: 35px;
+        height: 26px;
+        font-size: 1.6rem;
+        width: 200px;
+        text-align: center;
+        margin: 8;
+      }
+      @include mix.desktop {
+        margin-top: 10px;
+      }
+    }
+    &__button {
+      display: block;
+      background-color: var.$primary-color;
+      border: none;
+      border-radius: 4px;
+      padding: 7px;
+      cursor: pointer;
+      outline: inherit;
+      margin-bottom: 10px;
+      font-family: inherit;
+      color: var.$secondary-color;
+      position: absolute;
+      margin-top: 140px;
+      height: 30px;
+      font-size: 15px;
+
+      @include mix.tablet {
+        margin-bottom: 0;
+        margin-top: 220px;
+        font-size: 14px;
+        height: 40px;
+        width: 100px;
+      }
+
+      @include mix.desktop {
+        margin-top: 210px;
+        font-size: 14px;
+      }
+    }
   }
+
   .usersContainer:first-child {
     margin-top: 0px;
 
@@ -93,102 +167,17 @@ body {
       margin-top: 24px;
     }
   }
-
-  .usersContainer__img {
-    width: 26%;
-    border-radius: 50%;
-
-    @include mix.tablet {
-      width: 40%;
-    }
-    @include mix.desktop {
-      width: 35%;
-    }
-  }
-  .usersContainer__info {
-    display: flex;
-    width: 300px;
-    border-radius: 2px;
-    @include mix.desktop {
-      margin-top: 10px;
-    }
-  }
-
-  .usersContainer__button {
-    display: block;
-    background-color: rgb(137, 179, 74);
-    border: none;
-    border-radius: 4px;
-    padding: 7px;
-    cursor: pointer;
-    outline: inherit;
-    margin-bottom: 10px;
-    font-family: inherit;
-    color: white;
-    position: absolute;
-    margin-top: 140px;
-    height: 30px;
-    font-size: 15px;
-
-    @include mix.tablet {
-      margin-bottom: 0;
-      margin-top: 220px;
-      font-size: 14px;
-      height: 40px;
-      width: 100px;
-    }
-
-    @include mix.desktop {
-      margin-top: 210px;
-      font-size: 14px;
-    }
-  }
-  .usersContainer__button:hover {
-    background-color: rgba(137, 179, 74, 0.442);
-  }
 }
-
-.usersContainer__info--age,
-.usersContainer__info--gender,
-.usersContainer__info--location {
-  width: 200px;
-  text-align: center;
-  margin: 8;
-}
-
-.usersContainer__info--age {
-  color: rgb(137, 179, 74);
-  max-width: 35px;
-  height: 26px;
-  font-size: 1.6rem;
-}
-
-.usersContainer__info--location {
-  width: 200px;
-  text-align: center;
-}
-
-.usersContainer__info--name {
-  margin-top: 2px; //ÄNDRAD
-  margin-bottom: 0px; //ÄNDRAD
-  @include mix.tablet {
-    margin: 13px;
-  }
-
-  @include mix.desktop {
-    margin: 10px;
-  }
+.usersContainer__button:hover {
+  background-color: rgba(137, 179, 74, 0.442);
 }
 
 .profilesContainer .usersContainer {
   margin: 18.5px;
   @include mix.tablet {
-    // max-height: 240px;
     margin: 28px;
   }
-
   @include mix.desktop {
-    // max-height: 240px;
     margin: 22px;
   }
 }
@@ -196,7 +185,7 @@ body {
 .filterUsers__button,
 .paginationButtonBack,
 .paginationButtonNext {
-  background-color: rgb(255, 255, 255);
+  background-color: var.$secondary-color;
   border: none;
   border-radius: 4px;
   padding: 7px;
