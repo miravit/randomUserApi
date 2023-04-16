@@ -1,10 +1,10 @@
-import { nextTick } from "process";
 import { randomUserApi } from "./services/randomUsersApi";
 
 let page = 1;
 let userResults = 12;
 let gender = "";
 let paginationButton = document.getElementById("paginationButton");
+const buttonWrapper = document.getElementById("buttonWrapper");
 const pageContainer = document.getElementById("pageContainer");
 
 function updatePage() {
@@ -21,9 +21,8 @@ paginationButton.addEventListener("click", () => {
   }
   updatePage();
 });
-//}
 
-export function previousPage() {
+function previousPage() {
   let paginationButtonBack = document.createElement("button");
   paginationButtonBack.setAttribute("type", "button");
   paginationButtonBack.setAttribute("class", "paginationButtonBack");
@@ -39,13 +38,13 @@ export function previousPage() {
   paginationButtonBack.addEventListener("click", () => {
     page--;
     if (page >= 0 && page < 4) {
-      pageContainer.appendChild(paginationButton);
+      buttonWrapper.appendChild(paginationButton);
       userResults = 12;
       updatePage();
     }
   });
 
-  pageContainer.appendChild(paginationButtonBack);
+  buttonWrapper.appendChild(paginationButtonBack);
   // return page;
 }
 
@@ -83,6 +82,7 @@ export async function createHtml() {
 
     usersContainer.appendChild(usersInfoContainer);
     profilesContainer.appendChild(usersContainer);
+    pageContainer.appendChild(buttonWrapper);
 
     const userEmailButton = createUserEmailButton(response, usersContainer);
     userEmailButton.setAttribute("class", "usersContainer__button");
@@ -139,7 +139,7 @@ function createUserEmailButton(response, usersInfoContainer) {
   return userEmailButton;
 }
 
-export function filterUsers(page, userResults) {
+function filterUsers(page, userResults) {
   const filterGender = document.getElementById("filterUsers");
 
   const existingForm = filterGender.querySelector("form");
@@ -153,11 +153,12 @@ export function filterUsers(page, userResults) {
   const filterFemale = document.createElement("option");
   const filterLabel = document.createElement("label");
 
+  filterForm.setAttribute("class", "filterUsers__form");
+
   let filterbutton = document.createElement("button");
   filterbutton.setAttribute("type", "submit");
+  filterbutton.setAttribute("class", "filterUsers__button");
   filterbutton.innerHTML = "Sort";
-
-  filterLabel.innerHTML = "Choose Gender:";
 
   filterMale.value = "1";
   filterMale.text = "Male";
