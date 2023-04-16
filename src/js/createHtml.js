@@ -129,7 +129,7 @@ function createUserLocation(response, usersInfoContainer) {
 function createUserEmailButton(response, usersInfoContainer) {
   const userEmailButton = document.createElement("button");
   userEmailButton.setAttribute("type", "button");
-  userEmailButton.innerHTML = "Send an email!";
+  userEmailButton.innerHTML = "Send email!";
   userEmailButton.onclick = () => {
     window.location.href = "mailto:" + response.email;
   };
