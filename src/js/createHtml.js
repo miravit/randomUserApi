@@ -18,8 +18,6 @@ paginationButton.addEventListener("click", () => {
   } else if (page === 4) {
     paginationButton.remove();
     userResults = 2;
-
-    console.log("page har ändrats till " + page);
   }
   updatePage();
 });
@@ -185,6 +183,5 @@ export function filterUsers(page, userResults) {
     await randomUserApi(page, userResults, gender);
 
     createHtml();
-    nextPage();
   });
 }
