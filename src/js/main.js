@@ -3,7 +3,7 @@ import { nextPage } from "./createHtml";
 
 function init() {
   createHtml();
-  nextPage();
+  //nextPage();
 }
 
 init();

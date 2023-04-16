@@ -1,3 +1,4 @@
+import { nextTick } from "process";
 import { randomUserApi } from "./services/randomUsersApi";
 
 let page = 1;
@@ -6,33 +7,26 @@ let gender = "";
 let paginationButton = document.getElementById("paginationButton");
 const pageContainer = document.getElementById("pageContainer");
 
-export function nextPage() {
-  paginationButton.addEventListener("click", () => {
-    pageContainer.appendChild(paginationButton);
-    if (page < 4) {
-      page++;
-      console.log(page);
-      //createHtml();
-    } else if (page === 4) {
-      // const existingNextButton = document.querySelector("#paginationButton");
-      // if (paginationButton) {
-      paginationButton.remove();
-      userResults = 2;
-      //console.log(page);
-      //createHtml();
-      page--;
-      console.log("page har ändrats till " + page);
-      //nextPage();
-    }
-    // if (page > 1) {
-    //   createHtml();
-    // }
-
-    previousPage();
-    createHtml();
-    return page;
-  });
+function updatePage() {
+  createHtml();
+  previousPage();
 }
+
+//export function nextPage() {
+paginationButton.addEventListener("click", () => {
+  if (page < 4) {
+    page++;
+    console.log(page);
+  } else if (page === 4) {
+    paginationButton.remove();
+    userResults = 2;
+    page--;
+    console.log("page har ändrats till " + page);
+    //nextPage();
+  }
+  updatePage();
+});
+//}
 
 export function previousPage() {
   let paginationButtonBack = document.createElement("button");
@@ -48,20 +42,15 @@ export function previousPage() {
   }
 
   paginationButtonBack.addEventListener("click", () => {
-    if (page >= 0) {
+    page--;
+    if (page >= 0 && page < 4) {
+      pageContainer.appendChild(paginationButton);
       console.log("nu har du klickat på back");
       userResults = 12;
       console.log(page);
-      // if (page > 1) {
-      //   page--;
-      //   createHtml();
-      //   nextPage();
-      // }
-      if (page < 4) {
-        page--;
-        nextPage();
-        createHtml();
-      }
+
+      createHtml();
+      previousPage();
     }
   });
 
