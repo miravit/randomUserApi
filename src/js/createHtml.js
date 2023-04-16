@@ -45,7 +45,6 @@ function previousPage() {
   });
 
   buttonWrapper.appendChild(paginationButtonBack);
-  // return page;
 }
 
 export async function createHtml() {
@@ -57,7 +56,6 @@ export async function createHtml() {
 
   for (let i = 0; i < result.results.length; i++) {
     const response = result.results[i];
-    // console.log("-->", result.results.location.street.number);
 
     const usersContainer = document.createElement("div");
     usersContainer.setAttribute("class", "usersContainer");
@@ -176,13 +174,9 @@ function filterUsers(page, userResults) {
     e.preventDefault();
     if (chooseFilter.value === "1") {
       gender = "male";
-      console.log("male");
     } else if (chooseFilter.value === "2") {
       gender = "female";
     }
-
-    await randomUserApi(page, userResults, gender);
-
     createHtml();
   });
 }
