@@ -12,17 +12,14 @@ function updatePage() {
   previousPage();
 }
 
-//export function nextPage() {
 paginationButton.addEventListener("click", () => {
   if (page < 4) {
     page++;
-    console.log(page);
   } else if (page === 4) {
     paginationButton.remove();
     userResults = 2;
-    page--;
+
     console.log("page har ändrats till " + page);
-    //nextPage();
   }
   updatePage();
 });
@@ -45,12 +42,8 @@ export function previousPage() {
     page--;
     if (page >= 0 && page < 4) {
       pageContainer.appendChild(paginationButton);
-      console.log("nu har du klickat på back");
       userResults = 12;
-      console.log(page);
-
-      createHtml();
-      previousPage();
+      updatePage();
     }
   });
 
