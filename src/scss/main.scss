@@ -11,6 +11,17 @@ body {
   color: rgb(100, 102, 107);
 }
 
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include mix.tablet {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+
 .pageTitle {
   margin: 0;
   color: rgb(255, 255, 255);
@@ -36,23 +47,12 @@ body {
   }
 }
 
-.pageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  @include mix.tablet {
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-}
-
 .profilesContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 43px;
+  margin-bottom: 15px;
   @include mix.tablet {
     flex-direction: row;
     flex-wrap: wrap;
@@ -61,9 +61,6 @@ body {
   @include mix.desktop {
     margin-top: 0px;
   }
-  // @include mix.desktop {
-  //   margin: 0px;
-  // }
 
   .usersContainer {
     display: flex;
@@ -73,7 +70,7 @@ body {
     border-radius: 10px;
     width: 320px;
     margin-top: 40px;
-    height: 220px;
+    height: 160px;
 
     @include mix.tablet {
       margin: 12px;
@@ -93,7 +90,7 @@ body {
   }
 
   .usersContainer__img {
-    width: 120px;
+    width: 26%; //ändra på de andra skärmarna
     border-radius: 50%;
   }
   .usersContainer__info {
@@ -117,8 +114,8 @@ body {
     font-family: inherit;
     color: white;
     position: absolute;
-    margin-top: 200px;
-    height: 35px;
+    margin-top: 140px;
+    height: 30px;
 
     @include mix.tablet {
       margin-bottom: 0;
@@ -155,10 +152,19 @@ body {
 }
 
 .usersContainer__info--name {
-  margin: 10px;
+  margin-top: 2px; //ÄNDRAD
+  margin-bottom: 0px; //ÄNDRAD
+  @include mix.tablet {
+    margin: 10px;
+  }
+
+  @include mix.desktop {
+    margin: 10px;
+  }
 }
 
 .profilesContainer .usersContainer {
+  margin: 18.5px;
   @include mix.tablet {
     // max-height: 240px;
     margin: 28px;
@@ -183,7 +189,7 @@ body {
   font-family: inherit;
   color: white;
   height: 30px;
-  width: 50px;
+  width: 90px;
   margin-left: 7px;
 
   @include mix.tablet {
