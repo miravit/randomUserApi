@@ -3,30 +3,38 @@ import { randomUserApi } from "./services/randomUsersApi";
 let page = 1;
 let userResults = 12;
 let gender = "";
+let paginationButton = document.getElementById("paginationButton");
+const pageContainer = document.getElementById("pageContainer");
 
 export function nextPage() {
-  let paginationButton = document.getElementById("paginationButton");
   paginationButton.addEventListener("click", () => {
+    pageContainer.appendChild(paginationButton);
     if (page < 4) {
       page++;
-      createHtml();
+      console.log(page);
+      //createHtml();
     } else if (page === 4) {
-      const existingNextButton = document.querySelector(".paginationButton");
-      if (existingNextButton) {
-        existingNextButton.remove();
-      }
-      page++;
+      // const existingNextButton = document.querySelector("#paginationButton");
+      // if (paginationButton) {
+      paginationButton.remove();
       userResults = 2;
-      createHtml();
+      //console.log(page);
+      //createHtml();
+      page--;
+      console.log("page har ändrats till " + page);
+      //nextPage();
     }
-    if (page > 1) {
-      previousPage();
-    }
+    // if (page > 1) {
+    //   createHtml();
+    // }
+
+    previousPage();
+    createHtml();
+    return page;
   });
 }
 
 export function previousPage() {
-  const pageContainer = document.getElementById("pageContainer");
   let paginationButtonBack = document.createElement("button");
   paginationButtonBack.setAttribute("type", "button");
   paginationButtonBack.setAttribute("class", "paginationButtonBack");
@@ -40,10 +48,25 @@ export function previousPage() {
   }
 
   paginationButtonBack.addEventListener("click", () => {
-    page--;
-    createHtml();
+    if (page >= 0) {
+      console.log("nu har du klickat på back");
+      userResults = 12;
+      console.log(page);
+      // if (page > 1) {
+      //   page--;
+      //   createHtml();
+      //   nextPage();
+      // }
+      if (page < 4) {
+        page--;
+        nextPage();
+        createHtml();
+      }
+    }
   });
+
   pageContainer.appendChild(paginationButtonBack);
+  // return page;
 }
 
 export async function createHtml() {
