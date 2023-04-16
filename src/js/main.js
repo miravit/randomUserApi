@@ -1,9 +1,9 @@
 import { createHtml } from "./createHtml";
-import { pagination } from "./createHtml";
+import { nextPage } from "./createHtml";
 
 function init() {
   createHtml();
-  pagination();
+  nextPage();
 }
 
 init();

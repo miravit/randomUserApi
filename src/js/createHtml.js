@@ -4,18 +4,46 @@ let page = 1;
 let userResults = 12;
 let gender = "";
 
-export function pagination() {
+export function nextPage() {
   let paginationButton = document.getElementById("paginationButton");
   paginationButton.addEventListener("click", () => {
     if (page < 4) {
       page++;
       createHtml();
     } else if (page === 4) {
+      const existingNextButton = document.querySelector(".paginationButton");
+      if (existingNextButton) {
+        existingNextButton.remove();
+      }
       page++;
       userResults = 2;
       createHtml();
     }
+    if (page > 1) {
+      previousPage();
+    }
   });
+}
+
+export function previousPage() {
+  const pageContainer = document.getElementById("pageContainer");
+  let paginationButtonBack = document.createElement("button");
+  paginationButtonBack.setAttribute("type", "button");
+  paginationButtonBack.setAttribute("class", "paginationButtonBack");
+  paginationButtonBack.innerHTML = "Back";
+
+  const existingPreviousButton = document.querySelector(
+    ".paginationButtonBack"
+  );
+  if (existingPreviousButton) {
+    existingPreviousButton.remove();
+  }
+
+  paginationButtonBack.addEventListener("click", () => {
+    page--;
+    createHtml();
+  });
+  pageContainer.appendChild(paginationButtonBack);
 }
 
 export async function createHtml() {
@@ -152,6 +180,6 @@ export function filterUsers(page, userResults) {
     await randomUserApi(page, userResults, gender);
 
     createHtml();
-    pagination();
+    nextPage();
   });
 }
