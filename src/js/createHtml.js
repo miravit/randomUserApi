@@ -1,10 +1,10 @@
-import { nextTick } from "process";
 import { randomUserApi } from "./services/randomUsersApi";
 
 let page = 1;
 let userResults = 12;
 let gender = "";
 let paginationButton = document.getElementById("paginationButton");
+const buttonWrapper = document.getElementById("buttonWrapper");
 const pageContainer = document.getElementById("pageContainer");
 
 function updatePage() {
@@ -21,9 +21,8 @@ paginationButton.addEventListener("click", () => {
   }
   updatePage();
 });
-//}
 
-export function previousPage() {
+function previousPage() {
   let paginationButtonBack = document.createElement("button");
   paginationButtonBack.setAttribute("type", "button");
   paginationButtonBack.setAttribute("class", "paginationButtonBack");
@@ -39,14 +38,13 @@ export function previousPage() {
   paginationButtonBack.addEventListener("click", () => {
     page--;
     if (page >= 0 && page < 4) {
-      pageContainer.appendChild(paginationButton);
+      buttonWrapper.appendChild(paginationButton);
       userResults = 12;
       updatePage();
     }
   });
 
-  pageContainer.appendChild(paginationButtonBack);
-  // return page;
+  buttonWrapper.appendChild(paginationButtonBack);
 }
 
 export async function createHtml() {
@@ -58,7 +56,6 @@ export async function createHtml() {
 
   for (let i = 0; i < result.results.length; i++) {
     const response = result.results[i];
-    // console.log("-->", result.results.location.street.number);
 
     const usersContainer = document.createElement("div");
     usersContainer.setAttribute("class", "usersContainer");
@@ -83,6 +80,7 @@ export async function createHtml() {
 
     usersContainer.appendChild(usersInfoContainer);
     profilesContainer.appendChild(usersContainer);
+    pageContainer.appendChild(buttonWrapper);
 
     const userEmailButton = createUserEmailButton(response, usersContainer);
     userEmailButton.setAttribute("class", "usersContainer__button");
@@ -131,7 +129,7 @@ function createUserLocation(response, usersInfoContainer) {
 function createUserEmailButton(response, usersInfoContainer) {
   const userEmailButton = document.createElement("button");
   userEmailButton.setAttribute("type", "button");
-  userEmailButton.innerHTML = "Send an email!";
+  userEmailButton.innerHTML = "Send email!";
   userEmailButton.onclick = () => {
     window.location.href = "mailto:" + response.email;
   };
@@ -139,7 +137,7 @@ function createUserEmailButton(response, usersInfoContainer) {
   return userEmailButton;
 }
 
-export function filterUsers(page, userResults) {
+function filterUsers(page, userResults) {
   const filterGender = document.getElementById("filterUsers");
 
   const existingForm = filterGender.querySelector("form");
@@ -153,11 +151,12 @@ export function filterUsers(page, userResults) {
   const filterFemale = document.createElement("option");
   const filterLabel = document.createElement("label");
 
+  filterForm.setAttribute("class", "filterUsers__form");
+
   let filterbutton = document.createElement("button");
   filterbutton.setAttribute("type", "submit");
+  filterbutton.setAttribute("class", "filterUsers__button");
   filterbutton.innerHTML = "Sort";
-
-  filterLabel.innerHTML = "Choose Gender:";
 
   filterMale.value = "1";
   filterMale.text = "Male";
@@ -175,13 +174,9 @@ export function filterUsers(page, userResults) {
     e.preventDefault();
     if (chooseFilter.value === "1") {
       gender = "male";
-      console.log("male");
     } else if (chooseFilter.value === "2") {
       gender = "female";
     }
-
-    await randomUserApi(page, userResults, gender);
-
     createHtml();
   });
 }

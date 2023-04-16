@@ -11,6 +11,17 @@ body {
   color: rgb(100, 102, 107);
 }
 
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include mix.tablet {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+
 .pageTitle {
   margin: 0;
   color: rgb(255, 255, 255);
@@ -19,23 +30,24 @@ body {
     1px -1px 0 rgb(137, 179, 74), -1px -1px 0 #000;
 
   @include mix.tablet {
-    margin-bottom: 17px;
+    margin-bottom: 19px;
     font-size: 30px;
-    padding-top: 10px;
+    // padding-top: 10px;
   }
   @include mix.desktop {
     font-size: 40px;
+    margin-bottom: 0;
   }
 }
 
-.pageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  @include mix.tablet {
-    flex-direction: row;
-    flex-wrap: wrap;
+.filterUsers {
+  &__form {
+    @include mix.tablet {
+      margin-bottom: -7px;
+    }
+    @include mix.desktop {
+      margin-bottom: -20px;
+    }
   }
 }
 
@@ -44,17 +56,16 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 15px;
   @include mix.tablet {
     flex-direction: row;
     flex-wrap: wrap;
-    //margin: 30px;
+    margin-bottom: 0px;
   }
-  // @include mix.desktop {
-  //   margin-left: 200px;
-  // }
-  // @include mix.desktop {
-  //   margin: 0px;
-  // }
+  @include mix.desktop {
+    // margin-top: 10px;
+    margin-bottom: 17px;
+  }
 
   .usersContainer {
     display: flex;
@@ -64,19 +75,19 @@ body {
     border-radius: 10px;
     width: 320px;
     margin-top: 40px;
-    height: 230px;
+    height: 160px;
 
     @include mix.tablet {
       margin: 12px;
-      height: 253px;
-      margin-bottom: 300px;
+      height: 241px;
     }
     @include mix.desktop {
-      height: 250px;
+      height: 230px;
+      padding-top: -100px;
     }
   }
   .usersContainer:first-child {
-    margin-top: 5px;
+    margin-top: 0px;
 
     @include mix.tablet {
       margin-top: 24px;
@@ -84,8 +95,15 @@ body {
   }
 
   .usersContainer__img {
-    width: 120px;
+    width: 26%;
     border-radius: 50%;
+
+    @include mix.tablet {
+      width: 40%;
+    }
+    @include mix.desktop {
+      width: 35%;
+    }
   }
   .usersContainer__info {
     display: flex;
@@ -108,15 +126,21 @@ body {
     font-family: inherit;
     color: white;
     position: absolute;
-    margin-top: 210px;
-    height: 35px;
+    margin-top: 140px;
+    height: 30px;
+    font-size: 15px;
 
     @include mix.tablet {
-      margin-top: 235px;
+      margin-bottom: 0;
+      margin-top: 220px;
+      font-size: 14px;
+      height: 40px;
+      width: 100px;
     }
 
     @include mix.desktop {
-      margin-top: 235px;
+      margin-top: 210px;
+      font-size: 14px;
     }
   }
   .usersContainer__button:hover {
@@ -145,12 +169,60 @@ body {
 }
 
 .usersContainer__info--name {
-  margin: 10px;
+  margin-top: 2px; //ÄNDRAD
+  margin-bottom: 0px; //ÄNDRAD
+  @include mix.tablet {
+    margin: 13px;
+  }
+
+  @include mix.desktop {
+    margin: 10px;
+  }
 }
 
 .profilesContainer .usersContainer {
+  margin: 18.5px;
   @include mix.tablet {
     // max-height: 240px;
     margin: 28px;
+  }
+
+  @include mix.desktop {
+    // max-height: 240px;
+    margin: 22px;
+  }
+}
+
+.filterUsers__button,
+.paginationButtonBack,
+.paginationButtonNext {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 4px;
+  padding: 7px;
+  cursor: pointer;
+  outline: inherit;
+  margin-bottom: 10px;
+  font-family: inherit;
+  color: rgb(0, 0, 0);
+  height: 30px;
+  width: 90px;
+  margin-left: 7px;
+
+  @include mix.tablet {
+    width: 90;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  @include mix.desktop {
+    width: 90;
+    height: 28px;
+    font-size: 13px;
+  }
+}
+.buttonWrapper {
+  .paginationButtonNext {
+    margin-right: 40px;
   }
 }
